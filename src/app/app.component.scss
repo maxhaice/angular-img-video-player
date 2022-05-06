@@ -1,0 +1,123 @@
+.key-controls {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  &__content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+    &-input {
+      font-size: 16px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      width: 280px;
+      border: 2px solid black;
+      &:focus {
+        outline: none !important;
+        border: 2px solid black;
+      }
+    }
+    &-btn {
+      background-color: white;
+      font-size: 16px;
+      border: 2px solid black;
+      border-radius: 20px;
+      height: 30px;
+    }
+    &-key {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.player {
+  display: grid;
+  &-item {
+    height: 60vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    &__content {
+      width: 80vw;
+    }
+  }
+  &-controls {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+    &__content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      &__main {
+        height: 60px;
+        width: 60px;
+        background-color: white;
+        border: none;
+
+        &-img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      &__previous, &__next {
+        background-color: white;
+        border: none;
+        height: 40px;
+        width: 40px;
+
+        & > img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      &__previous {
+        & > img {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+.open-playlists-list, .close-playlists-list{
+  border: 2px solid black;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.open-playlists-list {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.close-playlists-list{
+  margin-left: 75px;
+  margin-top: 20px;
+}
+
+.playlists-list{
+  width: 360px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: -400px;
+  background-color: white;
+  border-right: 2px solid black;
+  &__content {
+    margin-top: 20px;
+  }
+  &__item {
+    padding: 10px 20px;
+    border-top: 2px solid black;
+    &-name {
+
+    }
+    &-key {
+      margin-top: 10px;
+    }
+  }
+}

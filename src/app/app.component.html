@@ -1,0 +1,80 @@
+<button class="open-playlists-list"
+        (click)="changePlaylistsState(playlistsList)">
+  Change playlist
+</button>
+<div #playlistsList class="playlists-list">
+  <button class="close-playlists-list"
+          (click)="changePlaylistsState(playlistsList)">
+    Close change playlist menu
+  </button>
+  <div class="playlists-list__content">
+    <div *ngFor="let playList of playlists; trackBy: trackByFn;let i = index"
+         (click)="choosePlayList(playList.playlistKey)">
+      <div class="playlists-list__item">
+        <p class="playlists-list__item-name">
+          Playlist {{i}}:
+        </p>
+        <p class="playlists-list__item-key">
+          {{playList.playlistKey}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="key-controls">
+    <div class="key-controls__content">
+      <input class="key-controls__content-input"
+             type="text"
+             #apiKeyInput>
+      <input class="key-controls__content-btn"
+             type="button"
+             (click)="inputApiKey(apiKeyInput)"
+             value="Set Api key">
+      <div class="key-controls__content-key">
+        <div>0f127773-529f-4ff8-b211-af9e5c22a5bc</div>
+      </div>
+      <input class="key-controls__content-btn"
+             type="button"
+             value="Use default key"
+             (click)="useDefaultKey(apiKeyInput)"
+      >
+    </div>
+  </div>
+  <div class="player"
+       #player
+       [style]="{'grid-template-columns': 'repeat(' + mediaItemsHttpResponse.length + ', 1fr)'}">
+    <div *ngFor="let mediaResponse of mediaItemsHttpResponse; let i = index;">
+      <ng-container
+        [ngTemplateOutlet]="mediaResponse.body['type'].includes('mp4') ? video : img"
+        [ngTemplateOutletContext] ="{mediaResponse:mediaResponse, i: i}"
+      >
+      </ng-container>
+    </div>
+    <ng-template #img let-mediaObj="mediaResponse" let-i='i'>
+      <div class="player-item">
+        <img [id]="'media' + i" class="player-item__content" src="{{mediaObj && mediaObj.url}}" alt=""/>
+      </div>
+    </ng-template>
+    <ng-template #video let-mediaObj="mediaResponse" let-i='i'>
+      <div class="player-item">
+        <video [id]="'media' + i" class="player-item__content" src="{{mediaObj && mediaObj.url}}" controls></video>
+      </div>
+    </ng-template>
+  </div>
+  <div class="player-controls" *ngIf="mediaItemsHttpResponse.length > 0">
+    <div class="player-controls__content">
+      <button class="player-controls__content__previous" (click)="previousClick()">
+        <img src="assets/player.svg">
+      </button>
+      <button class="player-controls__content__main" (click)="mainControlClick()">
+          <img class="player-controls__content__main-img"
+               [src]=" !isStarted ? 'assets/startBtn.png' : 'assets/stopBtn.png'"
+          >
+      </button>
+      <button class="player-controls__content__next" (click)="nextClick()">
+        <img src="assets/player.svg">
+      </button>
+    </div>
+  </div>
+</div>
